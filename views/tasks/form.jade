@@ -1,0 +1,32 @@
+extends ../base.jade
+
+block content
+  h3 #{action} task
+  form(method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="title") Title
+      input.form-control(type="text", name="title", id="title", value=task.title)
+    .form-group
+      label(for="type") Type
+      select.form-control(name="type", id="type")
+        option(value=task.work, selected=task.type == "Work") Work      
+        option(value=task.social, selected=task.type == "Social") Social
+        option(value=task.home, selected=task.type == "Home") Home
+        option(value=task.other, selected=task.type == "Other") Other
+    .form-group
+      label(for="startTime") Start Date and Time
+      input.form-control(type="datetime-local", name="startTime", id="startTime", value=task.startTime)
+    .form-group
+      label(for="endTime") End Date and Time
+      input.form-control(type="datetime-local", name="endTime", id="endTime", value=task.endTime)
+    .form-group
+      label(for="description") Description
+      input.form-control(type='text', name="description", id="description", value=task.description)
+    .form-group
+      label(for="completedBy") Task Complete
+        | &nbsp;
+        i.glyphicon.glyphicon-question-sign
+        | &nbsp;
+        input(type="checkbox", id="completedBy", name="completedBy", class='btn btn-primary btn-md', value=moment(Date.now()).format('MM-DD-YYYY') checked=task.completedBy)
+    .form-group
+    button.btn.btn-success(type="submit") Save

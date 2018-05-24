@@ -1,0 +1,56 @@
+extends ../base.jade
+
+block content
+  - points = 0;
+  - output = 0;
+  - minlevel = 1; // first level to display
+  - maxlevel = 500; // last level to display
+  - var i= [];
+  - for(lvl = minlevel; lvl <= maxlevel; lvl++){points +=5; i.push(points);}
+  - function getXPCalc(){for (lvl = minlevel; lvl <= maxlevel; lvl++){points += Math.floor(lvl + 5 * Math.floor(10, lvl / 10));output = Math.floor(points / 4);i.push(output);}}
+  // above is a typical Dungeons and Dragons Experience curve represented and simplified.
+  - console.log(i);
+  - var totalXp = 0;
+  - totalXp = tasks.reduce(function(total, tasks) { return total + tasks.newXp; }, 0)
+  - function findLevel(exp){var index = i.indexOf(exp); return index +1;}
+ 
+  
+
+   .col-md-8
+    h3 Tasks
+    a(href="/tasks/add", class='btn btn-success btn-sm')
+      i.glyphicon.glyphicon-plus
+      span  Add task
+     
+     
+  .col-md-4   
+    h3 Your stats:
+    .col-md-4
+     img.icon(src=tasks.imageUrl || "https://freeiconshop.com/files/edd/person-flat.png")
+    .col-md-8
+      User Experience Total: #{totalXp}
+      div User level: #{findLevel(totalXp)}
+      div User Score: 3.5
+    
+      
+  .col-md-12
+   h4 Great, now get to work!
+    each task in tasks
+     .media
+      a(href="/tasks/#{task.id}")
+        .media-left
+            img.icon(src=task.imageUrl || "https://freeiconshop.com/files/edd/task-done-flat.png")
+        .media-body
+          h4= task.title
+          p Date and Time by: #{task.endTime}
+          p Category: #{task.type}
+          p task Xp: #{task.newXp}
+
+  if !tasks.length
+    p No tasks found.
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") More

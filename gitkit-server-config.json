@@ -1,0 +1,8 @@
+{
+  "clientId": "1068361784339-8hv1trc7dsd1olfsv17fghqohbfdm5r8.apps.googleusercontent.com",
+  "projectId": "cloud-computing-project-ukc",
+  "serviceAccountEmail": "",
+  "serviceAccountPrivateKeyFile": "/pvt/Cloud Computing Project UKC-1674ea63a9ba.json",
+  "widgetUrl": "http://localhost:8080/gitkit",
+  "cookieName": "gtoken"
+}

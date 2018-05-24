@@ -1,0 +1,41 @@
+extends ../base.jade
+
+block content
+  h3 task
+    small
+
+  .btn-group
+    a(href="/tasks/#{task.id}/edit", class='btn btn-primary btn-sm')
+      i.glyphicon.glyphicon-edit
+      span  Edit task
+    a(href="/tasks/#{task.id}/delete", class='btn btn-danger btn-sm')
+      i.glyphicon.glyphicon-trash
+      span  Delete task
+    //- form(method="POST", enctype="multipart/form-data")
+      button.btn.btn-success(type="submit") Task Complete
+    //- a(href="/tasks/#{task.id}/done", class='')
+    //-   i.glyphicon.glyphicon-ok-circle
+    //-   span  Task Complete
+    -
+      var startTime_converted = (new Date(task.startTime)).toISOString().replace(/-|:|\.\d\d\d/g,"");
+      var endTime_converted = (new Date(task.endTime)).toISOString().replace(/-|:|\.\d\d\d/g,"");
+    a.btn.btn-primary.btn-sm(href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=#{task.title}&dates=#{startTime_converted}/#{endTime_converted}&details=#{task.description}&sf=true&output=xml", target="_blank", rel="nofollow")
+      i.glyphicon.glyphicon-edit
+      span Add to my calendar
+
+  .media
+    .media-left
+      img.icon(src=task.imageUrl || "https://freeiconshop.com/files/edd/task-done-flat.png")
+    .media-body
+      h4= task.title
+        | &nbsp;
+        small from #{task.startTime}
+        | &nbsp;
+        small to #{task.endTime}
+      h4= task.type
+        | &nbsp;
+        small= task.work
+      p= task.description
+      small Added by #{task.createdBy}
+      if task.completedBy
+        p Task Completed on #{task.completedBy} - Well done!

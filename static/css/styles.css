@@ -1,0 +1,17 @@
+.icon {
+    width: 5em;
+}
+
+#user-name {
+    color: #9d9d9d;
+}
+
+#user-name:hover {
+    color: white;
+    cursor: pointer;
+}
+
+#fb-like {
+    width: 100%;
+    overflow: hidden;
+}
